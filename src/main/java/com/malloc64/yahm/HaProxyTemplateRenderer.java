@@ -1,6 +1,6 @@
-package com.brightcove.analytics.haproxy;
+package com.malloc64.yahm;
 
-import com.brightcove.analytics.haproxy.api.model.LoadbalancedApplication;
+import com.malloc64.yahm.api.model.LoadbalancedApplication;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.base.Charsets;

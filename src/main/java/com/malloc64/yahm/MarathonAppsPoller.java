@@ -1,4 +1,4 @@
-package com.brightcove.analytics.haproxy;
+package com.malloc64.yahm;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Sets;

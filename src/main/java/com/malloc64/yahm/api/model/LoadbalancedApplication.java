@@ -1,4 +1,4 @@
-package com.brightcove.analytics.haproxy.api.model;
+package com.malloc64.yahm.api.model;
 
 import javax.validation.constraints.NotNull;
 

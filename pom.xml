@@ -4,9 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.brightcove.analytics</groupId>
+    <groupId>com.malloc64.yahm</groupId>
     <artifactId>haproxy-marathon-manager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <description>HAProxy manager and reconfiguration daemon for marathon</description>
+    <developers>
+        <developer>
+            <name>Ankur Chauhan</name>
+            <email>ankur@malloc64.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -97,7 +104,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.brightcove.analytics.haproxy.ManagerApplication</mainClass>
+                                    <mainClass>com.malloc64.yahm.ManagerApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

@@ -1,6 +1,6 @@
-package com.brightcove.analytics.haproxy;
+package com.malloc64.yahm;
 
-import com.brightcove.analytics.haproxy.api.model.LoadbalancedApplication;
+import com.malloc64.yahm.api.model.LoadbalancedApplication;
 import com.google.common.base.Charsets;
 import io.dropwizard.lifecycle.Managed;
 import org.apache.curator.framework.CuratorFramework;

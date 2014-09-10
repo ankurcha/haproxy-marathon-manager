@@ -1,4 +1,4 @@
-package com.brightcove.analytics.haproxy;
+package com.malloc64.yahm;
 
 import com.codahale.metrics.health.HealthCheck;
 import org.apache.curator.framework.CuratorFramework;

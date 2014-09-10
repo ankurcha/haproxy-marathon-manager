@@ -1,6 +1,6 @@
-package com.brightcove.analytics.haproxy;
+package com.malloc64.yahm;
 
-import com.brightcove.analytics.haproxy.api.AppsResource;
+import com.malloc64.yahm.api.AppsResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;

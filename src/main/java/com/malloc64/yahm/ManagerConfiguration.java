@@ -1,4 +1,4 @@
-package com.brightcove.analytics.haproxy;
+package com.malloc64.yahm;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;

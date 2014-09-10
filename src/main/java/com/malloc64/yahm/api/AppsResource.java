@@ -1,7 +1,7 @@
-package com.brightcove.analytics.haproxy.api;
+package com.malloc64.yahm.api;
 
-import com.brightcove.analytics.haproxy.api.model.LoadbalancedApplication;
-import com.brightcove.analytics.haproxy.ZookeeperStore;
+import com.malloc64.yahm.api.model.LoadbalancedApplication;
+import com.malloc64.yahm.ZookeeperStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
