@@ -1,9 +1,15 @@
 package com.brightcove.analytics.haproxy.api.model;
 
+import javax.validation.constraints.NotNull;
+
 public class LoadbalancedApplication {
 
+    @NotNull
     String id;
+
+    @NotNull
     String template;
+
     String sslCertificate;
 
     public String getId() {
