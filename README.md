@@ -1,4 +1,4 @@
-# Yet another HaProxy manager
+# Yet another HAProxy manager
 
 This project intends to be a manager process that uses:
 
@@ -7,18 +7,18 @@ This project intends to be a manager process that uses:
 * Gracefully reload HAProxy configuration
 * Give the user full control over the configuration.
 
-This project intends to be so light weight that the only thing that it provides is that it will just provide the very basic token replacement using moustache templates. These templates are defined by the user so anyone who is familiar with HaProxy templates can write very complex templates and it wil just work!
+This project intends to be so light weight that the only thing that it provides is that it will just provide the very basic token replacement using moustache templates. These templates are defined by the user so anyone who is familiar with HAProxy templates can write very complex templates and it wil just work!
 
-To get an idea of how this will work have a look at [HaProxyTemplateRendererTest](https://github.com/ankurcha/haproxy-marathon-manager/blob/master/src/test/java/com/brightcove/analytics/haproxy/HaProxyTemplateRendererTest.java).
+To get an idea of how this will work have a look at [HAProxyTemplateRendererTest](https://github.com/ankurcha/haproxy-marathon-manager/blob/master/src/test/java/com/brightcove/analytics/haproxy/HaProxyTemplateRendererTest.java).
 
 ## Getting started
 
-* Install haproxy
-* Install agent jar
+* Install HAProxy - `add-apt-repository -y ppa:vbernat/haproxy-1.5 && apt-get update && apt-get -y install haproxy`
+* Install agent - Install the jar (I prefer `/opt/haproxy_manager` with configuration in `/etc/haproxy_manager.yaml`)
 
 You may want to consider using monit or runit or upstart or something like that to manage the process.
 
-* Start the agent
+* Start the agent - `java -jar haproxy_manager.jar server /etc/haproxy_manager.yaml`
 
 The agent exposes the functionality as a REST API with the following JSON end points
 
