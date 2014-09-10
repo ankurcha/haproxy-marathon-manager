@@ -2,7 +2,6 @@ package com.brightcove.analytics.haproxy;
 
 import com.brightcove.analytics.haproxy.api.model.LoadbalancedApplication;
 import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
@@ -12,7 +11,10 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +25,14 @@ public class HaProxyTemplateRenderer {
     private static final MustacheFactory mf = new DefaultMustacheFactory();
 
     private String baseTemplate;
-    private Mustache defaultApplicationTemplate;
     private String sslCertsPath;
     private ZookeeperStore store;
 
     public HaProxyTemplateRenderer(ManagerConfiguration config, ZookeeperStore store) throws IOException {
-        StringReader reader = new StringReader(Resources.toString(this.getClass().getResource("/default_application_template.cfg"), Charsets.UTF_8));
         this.store = store;
         this.sslCertsPath = config.getSslCertsPath();
-        this.baseTemplate = StringUtils.join(Files.readLines(new File(config.getHaproxyBaseTemplate()), Charsets.UTF_8), "\n");
+        this.baseTemplate = StringUtils.join(Files.readLines(new File(config.getHaproxyBaseTemplatePath()), Charsets.UTF_8), "\n");
         this.baseTemplate = Resources.toString(this.getClass().getResource("/haproxy_template.cfg.tmpl"), Charsets.UTF_8);
-        this.defaultApplicationTemplate = mf.compile(reader, "default_application_template");
     }
 
     public String renderApplication(App app) {
@@ -42,9 +41,7 @@ public class HaProxyTemplateRenderer {
         // add application configs
         try {
             LoadbalancedApplication lbApp = store.get(app.getId());
-            if (lbApp == null) {
-                defaultApplicationTemplate.execute(writer, config);
-            } else {
+            if (lbApp != null) {
                 try {
                     config.certPath = writeSSLCert(app.getId() + ".pem", lbApp.getSslCertificate());
                 } catch (IOException e) {
