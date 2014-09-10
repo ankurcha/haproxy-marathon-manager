@@ -4,6 +4,7 @@ import com.brightcove.analytics.haproxy.api.model.LoadbalancedApplication;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
 import mesosphere.marathon.client.model.v2.App;
 import org.apache.commons.lang.StringUtils;
@@ -30,7 +31,10 @@ public class HaProxyTemplateRenderer {
     public HaProxyTemplateRenderer(ManagerConfiguration config, ZookeeperStore store) throws IOException {
         this.store = store;
         this.sslCertsPath = config.getSslCertsPath();
-        this.baseTemplate = StringUtils.join(Files.readLines(new File(config.getHaproxyBaseTemplatePath()), Charsets.UTF_8), "\n");
+        File baseTemplateFile = new File(config.getHaproxyBaseTemplatePath());
+        Preconditions.checkArgument((baseTemplateFile.exists() && baseTemplateFile.canRead()),
+                "Unable to read base haproxy template file: " + config.getHaproxyBaseTemplatePath());
+        this.baseTemplate = StringUtils.join(Files.readLines(baseTemplateFile, Charsets.UTF_8), "\n");
     }
 
     public String renderApplication(App app) {

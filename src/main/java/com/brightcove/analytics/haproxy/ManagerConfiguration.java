@@ -30,7 +30,7 @@ public class ManagerConfiguration extends Configuration {
     private String zookeeperBasePath = "/marathon-haproxy/state";
 
     @NotEmpty
-    String haproxyBaseTemplatePath = this.getClass().getResource("/haproxy_template.cfg.tmpl").toString();
+    String haproxyBaseTemplatePath = "/etc/haproxy_template.cfg.tmpl";
 
     @JsonProperty
     public String getMarathonEndPoint() {
