@@ -1,0 +1,21 @@
+global
+  daemon
+  log 127.0.0.1 local0
+  log 127.0.0.1 local1 notice
+  maxconn 16384
+
+defaults
+  log              global
+  retries          3
+  maxconn          10000
+  timeout connect  50000
+  timeout client   50000
+  timeout server   50000
+
+listen stats
+  bind 127.0.0.1:9090
+  balance
+  mode http
+  stats enable
+  stats auth admin:admin
+

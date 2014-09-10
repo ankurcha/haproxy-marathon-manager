@@ -1,0 +1,18 @@
+# connection string for the zookeeper ensemble
+zookeeperConnectionString: zk://localhost:2181
+# the path in the zookeeper use to keep track of the state of the apps
+zookeeperBasePath: /marathon-haproxy/state
+
+# command to execute to cause haproxy to reload it's config
+# @PORTS@ are replaced with a comma separated list of ports
+# this command is borrowed from https://medium.com/@Drew_Stokes/actual-zero-downtime-with-haproxy-18318578fde6
+haproxyReloadCommand: iptables -I INPUT -p tcp -m multiport —dports @PORTS@ —syn -j DROP && sleep 0.5 && service haproxy reload && iptables -D INPUT -p -tcp -m multiport —dports @PORTS@ —syn -j DROP
+# the base template consists of the common parts ie the global, default and other static sections of the proxy config file
+haproxyBaseTemplatePath: /etc/haproxy-manager/haproxy.cfg.tmpl
+# a directory (must exist), that is used to store all the certificates
+sslCertsPath: /etc/haproxy/certs
+# target path of the rendered haproxy config file
+haproxyConfigPath: /etc/haproxy/haproxy.cfg
+
+# endpoint for the marathon server
+marathonEndPoint: http://localhost:8080
