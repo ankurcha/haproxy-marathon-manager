@@ -70,4 +70,20 @@ public class AppsResource {
         }
     }
 
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") String appId) {
+        try {
+            LoadbalancedApplication app = store.get(appId);
+            if (app == null) {
+                throw new WebApplicationException(NOT_FOUND);
+            }
+            store.delete(appId);
+            return Response.status(NO_CONTENT).build();
+        } catch (Exception e) {
+            log.warn("Unable to get data from zookeeper", e);
+            throw new WebApplicationException(e, INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

@@ -62,6 +62,12 @@ public class ZookeeperStore implements Managed {
         return app;
     }
 
+    public void delete(String appId) throws Exception {
+        String nodePath = basePath + appId;
+        PathUtils.validatePath(nodePath);
+        framework.delete().forPath(nodePath);
+    }
+
     @Override
     public void start() throws Exception {
         framework.start();
