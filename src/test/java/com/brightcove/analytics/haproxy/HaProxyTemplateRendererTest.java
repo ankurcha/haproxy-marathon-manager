@@ -24,6 +24,29 @@ public class HaProxyTemplateRendererTest {
     @Before
     public void setUp() throws Exception {
         config = new ManagerConfiguration();
+        File baseTemplate = new File(Files.createTempDir(), "haproxy_base_template.cfg.tmpl");
+        Files.write("global\n" +
+                "  daemon\n" +
+                "  log 127.0.0.1 local0\n" +
+                "  log 127.0.0.1 local1 notice\n" +
+                "  maxconn 16384\n" +
+                "\n" +
+                "defaults\n" +
+                "  log              global\n" +
+                "  retries          3\n" +
+                "  maxconn          10000\n" +
+                "  timeout connect  50000\n" +
+                "  timeout client   50000\n" +
+                "  timeout server   50000\n" +
+                "\n" +
+                "listen stats\n" +
+                "  bind 127.0.0.1:9090\n" +
+                "  balance\n" +
+                "  mode http\n" +
+                "  stats enable\n" +
+                "  stats auth admin:admin\n" +
+                "\n", baseTemplate, Charsets.UTF_8);
+        config.setHaproxyBaseTemplatePath(baseTemplate.getAbsolutePath());
         config.setSslCertsPath(Files.createTempDir().getAbsolutePath());
         ZookeeperStore store = new ZookeeperStore(null, null) {
             @Override
@@ -65,13 +88,7 @@ public class HaProxyTemplateRendererTest {
         }};
         app.setTasks(tasks);
         String renderedConfig = renderer.renderApplication(app);
-        Assert.assertEquals(
-                "listen rolling_mongos\n" +
-                        "  bind 0.0.0.0:1234\n" +
-                        "  mode tcp\n" +
-                        "  option tcplog\n" +
-                        "  balance leastconn\n" +
-                        "  server task-rm-0 host1:4567 check\n", renderedConfig);
+        Assert.assertEquals("Unknown applications should not result in any configuration", "", renderedConfig);
     }
 
     @Test
@@ -113,7 +130,7 @@ public class HaProxyTemplateRendererTest {
         }};
         app.setTasks(tasks);
         String renderedConfig = renderer.renderApplication(app);
-        Assert.assertEquals(
+        Assert.assertEquals("Known application should produce rendered template",
                 "backend api-backend\n" +
                         "  mode http\n" +
                         "  balance roundrobin\n" +

@@ -5,7 +5,6 @@ import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.MustacheFactory;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import com.google.common.io.Resources;
 import mesosphere.marathon.client.model.v2.App;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -32,7 +31,6 @@ public class HaProxyTemplateRenderer {
         this.store = store;
         this.sslCertsPath = config.getSslCertsPath();
         this.baseTemplate = StringUtils.join(Files.readLines(new File(config.getHaproxyBaseTemplatePath()), Charsets.UTF_8), "\n");
-        this.baseTemplate = Resources.toString(this.getClass().getResource("/haproxy_template.cfg.tmpl"), Charsets.UTF_8);
     }
 
     public String renderApplication(App app) {
