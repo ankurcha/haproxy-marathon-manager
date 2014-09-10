@@ -1,4 +1,4 @@
-# Yet another HAProxy manager
+# YAHM - Yet Another HAProxy Manager
 
 This project intends to be a manager process that uses:
 
