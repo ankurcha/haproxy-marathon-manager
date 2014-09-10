@@ -9,7 +9,7 @@ This project intends to be a manager process that uses:
 
 This project intends to be so light weight that the only thing that it provides is that it will just provide the very basic token replacement using moustache templates. These templates are defined by the user so anyone who is familiar with HAProxy templates can write very complex templates and it wil just work!
 
-To get an idea of how this will work have a look at [HAProxyTemplateRendererTest](https://github.com/ankurcha/haproxy-marathon-manager/blob/master/src/test/java/com/brightcove/analytics/haproxy/HaProxyTemplateRendererTest.java).
+To get an idea of how this will work have a look at [HAProxyTemplateRendererTest](https://github.com/ankurcha/haproxy-marathon-manager/blob/master/src/test/java/com/malloc64/yahm/HaProxyTemplateRendererTest.java).
 
 ## Getting started
 
